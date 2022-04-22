@@ -23,8 +23,8 @@ public class ganFanRen extends AbstractGame{
     private final Image ANGRY = new Image("res/character/Male_Angry.png");
     private final Image BAR = new Image("res/bar.png");
     private final Image MENU_ICON = new Image("res/menu_icon_2.png");
-    private final Image APPLE = new Image("res/Food/burger.png");
-    private final Image BURGER = new Image("res/Food/apple.png");
+    private final Image APPLE = new Image("res/Food/apple.png");
+    private final Image BURGER = new Image("res/Food/burger.png");
     private final Image ICE_CREAM = new Image("res/Food/ice_cream.png");
     private final Font font = new Font("res/wheaton.otf", 55);
     private final Font chooseFont = new Font("res/wheaton.otf", 45);
@@ -115,6 +115,7 @@ public class ganFanRen extends AbstractGame{
             printMessage("Choose your Age", chooseFont, -200);
             printMessage("0-15   15-45   45-100", chooseFont, -50);
             printMessage("Choose your Weight", chooseFont, 50);
+
         } else if (gameState == MAIN_WINDOW) {
             character.updateCharacter();
             character.displayCharacter();
@@ -125,17 +126,26 @@ public class ganFanRen extends AbstractGame{
             }
 
         } else if (gameState == MENU_WINDOW) {
-            System.out.println("in menu");
+            // System.out.println("in menu");
             // character.updateCharacter();
             character.displayCharacter();
-            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.0);
+            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/0.7);
             // Render all food.
+            int x = 60;
+            int y = 850;
             for (Food food : foods) {
-                if (foods == null) {
-                    break;
-                }
                 // Draw food at desired position.
-                food.displayFood(100, 450);
+                food.displayFood(x, y);
+                x += 90;
+                if (x >= 428) {
+                    x = 60;
+                    y += 200;
+                }
+                if (detectBottomPress(input, food)) {
+                    character.eat(food);
+                    System.out.println(character.toString());
+                    gameState = MAIN_WINDOW;
+                }
             }
         }
 

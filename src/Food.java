@@ -3,8 +3,8 @@ import bagel.util.Point;
 import bagel.util.Rectangle;
 
 public class Food extends Rectangle{
-    private static final int WIDTH = 32;
-    private static final int HEIGHT = 32;
+    private static final int WIDTH = 96;
+    private static final int HEIGHT = 96;
 
     private Image image;
     private int weight = 0;
@@ -43,5 +43,6 @@ public class Food extends Rectangle{
 
     public void displayFood(int x, int y) {
         this.image.draw(x,y);
+        this.moveTo(new Point(x-48, y-48));
     }
 }
