@@ -115,7 +115,9 @@ public class ganFanRen extends AbstractGame{
             printMessage("Choose your Weight", chooseFont, 50);
 
         } else if (gameState == MAIN_WINDOW) {
-            person.updateCharacter();
+            if (person.updateCharacter()) {
+                gameState = GAME_OVER;
+            }
             person.displayCharacter();
             MENU_ICON.draw(70, 860);
             Rectangle menuHitBox = MENU_ICON.getBoundingBoxAt(new Point(70, 860));
@@ -124,8 +126,6 @@ public class ganFanRen extends AbstractGame{
             }
 
         } else if (gameState == MENU_WINDOW) {
-            // System.out.println("in menu");
-            // character.updateCharacter();
             person.displayCharacter();
             BAR.draw(Window.getWidth() / 2.0, Window.getHeight() / 0.7);
             // Render all food.
@@ -147,6 +147,12 @@ public class ganFanRen extends AbstractGame{
                 if (input.wasPressed(Keys.BACKSPACE)) {
                     gameState = MAIN_WINDOW;
                 }
+            }
+        } else if (gameState == GAME_OVER) {
+            person.displayCharacter();
+            printMessage("Died from Heart attack", font, 0);
+            if (input.wasPressed(Keys.SPACE)) {
+                gameState = NOT_STARTED;
             }
         }
 
