@@ -75,11 +75,7 @@ public class Person extends Rectangle {
     }
 
     public void updateCharacter(Input input) {
-        if (foodie.gameState == Foodie.CHOOSING_WINDOW) return;
-        if (foodie.gameState == Foodie.NOT_STARTED) {
-            resetPlayer();
-            return;
-        }
+        if (foodie.gameState == Foodie.NOT_STARTED || foodie.gameState == Foodie.CHOOSING_WINDOW) return;
         if (foodie.gameState == Foodie.GAME_OVER) {
             displayCharacter();
             return;

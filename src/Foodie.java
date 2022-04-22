@@ -57,7 +57,10 @@ public class Foodie extends AbstractGame{
                 break;
             case GAME_OVER:
                 dh.drawGameOverWindow();
-                if (input.wasPressed(Keys.SPACE)) setGameState(NOT_STARTED);
+                if (input.wasPressed(Keys.SPACE)) {
+                    person.resetPlayer();
+                    setGameState(NOT_STARTED);
+                }
                 break;
         }
 
