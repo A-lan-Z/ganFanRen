@@ -8,11 +8,12 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 
 public class ganFanRen extends AbstractGame{
-    private final static int WINDOW_WIDTH = 512;
-    private final static int WINDOW_HEIGHT = 768;
+    private final static int WINDOW_WIDTH = 390;
+    private final static int WINDOW_HEIGHT = 844;
     private final static String GAME_TITLE = "Gan Fan Ren";
     private final Image BACKGROUND_IMAGE = new Image("res/room.png");
     private final Image ANGRY = new Image("res/character/Male_Angry.png");
+    private final Image BAR = new Image("res/bar.png");
 
     private Character character;
     private int gameState = 0;
@@ -47,11 +48,13 @@ public class ganFanRen extends AbstractGame{
         BACKGROUND_IMAGE.draw(Window.getWidth()/2.0, Window.getHeight()/2.0);
         Food burger = new Food(2, 0, 0, 0);
 
+
         if (gameState == 0) {
             Point centre = new Point(Window.getWidth()/2.0,Window.getHeight()/2.0);
             Point topLeft = findTopLeft(ANGRY, centre);
             character = new Character(topLeft);
             character.displayCharacter();
+            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.1);
             gameState = 1;
 
         } else {
@@ -61,6 +64,7 @@ public class ganFanRen extends AbstractGame{
             }
             character.updateCharacter();
             character.displayCharacter();
+            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.1);
 
         }
 
