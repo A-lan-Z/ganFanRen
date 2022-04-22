@@ -17,7 +17,6 @@ public class ganFanRen extends AbstractGame{
     private final static int CHOOSING_WINDOW = 0;
     private final static int MAIN_WINDOW = 1;
     private final static int MENU_WINDOW = 2;
-    private final static int GAME_ENDED = 3;
     private final static String GAME_TITLE = "Gan Fan Ren";
     private final Image BACKGROUND_IMAGE = new Image("res/room.png");
     private final Image M = new Image("res/character/M.png");
@@ -155,11 +154,7 @@ public class ganFanRen extends AbstractGame{
 
         /* Exit the game at any state through ESC. */
         if (input.wasPressed(Keys.ESCAPE)){
-            try {
-                character.save();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            character.save();
             Window.close();
         }
 

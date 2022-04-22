@@ -89,9 +89,16 @@ public class Character extends Rectangle {
         weightStatus.displayStatus(weight);
     }
 
-    public void save() throws IOException {
+    public void save() {
+        try(OutputStream out = new FileOutputStream("./res/Properties/person.properties")) {
+            properties.setProperty("hunger", Double.toString(hunger));
+            properties.setProperty("weight", Double.toString(weight));
+            properties.setProperty("lastUpdated", Long.toString(lastUpdated));
+            properties.store(out, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        properties.store(new BufferedWriter(new FileWriter("./res/Properties/person.properties")), "");
     }
 
 
