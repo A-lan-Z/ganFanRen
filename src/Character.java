@@ -17,10 +17,15 @@ public class Character extends Rectangle {
     private int hair = 0;
     private int acne = 0;
 
-
     public Character(Point position) {
         super(position, WIDTH, HEIGHT);
         this.image = ANGRY;
+    }
+
+    public Character(Point position, int weight) {
+        super(position, WIDTH, HEIGHT);
+        this.image = ANGRY;
+        this.weight = weight;
     }
 
     public void displayCharacter() {

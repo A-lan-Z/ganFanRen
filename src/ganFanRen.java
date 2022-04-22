@@ -3,13 +3,14 @@ import bagel.Font;
 import bagel.Image;
 import bagel.Window;
 import bagel.util.Point;
+import bagel.util.Rectangle;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
 
 public class ganFanRen extends AbstractGame{
-    private final static int WINDOW_WIDTH = 390;
-    private final static int WINDOW_HEIGHT = 844;
+    private final static int WINDOW_WIDTH = 428;
+    private final static int WINDOW_HEIGHT = 926;
     private final static String GAME_TITLE = "Gan Fan Ren";
     private final Image BACKGROUND_IMAGE = new Image("res/room.png");
     private final Image ANGRY = new Image("res/character/Male_Angry.png");
@@ -30,6 +31,19 @@ public class ganFanRen extends AbstractGame{
         double y = middle.y - (image.getHeight() / 2);
         return new Point(x, y);
     }
+
+    /**
+     * Method used to detect bottom pressed.
+     */
+    private boolean detectBottomPress(Input input, Rectangle button) {
+        Point mousePos = input.getMousePosition();
+        /* Check if mouse hovers on button */
+        if ((button.intersects(mousePos)) && (input.wasPressed(MouseButtons.LEFT))) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * The entry point for the program.
@@ -54,7 +68,7 @@ public class ganFanRen extends AbstractGame{
             Point topLeft = findTopLeft(ANGRY, centre);
             character = new Character(topLeft);
             character.displayCharacter();
-            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.1);
+            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.0);
             gameState = 1;
 
         } else {
@@ -64,8 +78,13 @@ public class ganFanRen extends AbstractGame{
             }
             character.updateCharacter();
             character.displayCharacter();
-            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.1);
+            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.0);
 
+        }
+
+        /* Exit the game at any state through ESC. */
+        if (input.wasPressed(Keys.ESCAPE)){
+            Window.close();
         }
 
     }
