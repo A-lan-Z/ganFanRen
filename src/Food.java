@@ -1,6 +1,7 @@
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Rectangle;
+import java.util.*;
 
 public class Food extends Rectangle{
     private static final int WIDTH = 96;
@@ -14,15 +15,15 @@ public class Food extends Rectangle{
     private double acne = 0;
     private double energy = 0;
 
-    public Food(Image image, double weight, double hunger, double mood, double hair, double acne) {
+    public Food(Properties prop) {
         super(new Point(0, 0), WIDTH, HEIGHT);
-        this.image = image;
-        this.weight = weight;
-        this.hunger = hunger;
-        this.mood = mood;
-        this.hair = hair;
-        this.acne = acne;
-        this.energy = energy;
+        this.image = new Image(prop.getProperty("image"));
+        this.weight = Double.parseDouble(prop.getProperty("weight"));
+        this.hunger = Double.parseDouble(prop.getProperty("hunger"));
+        this.mood = Double.parseDouble(prop.getProperty("mood"));
+        this.hair = Double.parseDouble(prop.getProperty("hair"));
+        this.acne = Double.parseDouble(prop.getProperty("acne"));
+        this.energy = Double.parseDouble(prop.getProperty("energy"));
     }
 
     public double getWeight() {

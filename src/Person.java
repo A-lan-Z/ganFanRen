@@ -1,6 +1,5 @@
-import bagel.Image;
-import bagel.util.Point;
-import bagel.util.Rectangle;
+import bagel.*;
+import bagel.util.*;
 
 import java.io.*;
 import java.util.*;
@@ -29,25 +28,36 @@ public class Person extends Rectangle {
     private Status hungerStatus;
     private Status weightStatus;
     private Status energyStatus;
+    private Image aura;
+    private Foodie foodie;
 
+    public Person(Foodie foodie) {
+        super(new Point(Window.getWidth() / 2.0 - M.getWidth() / 2,
+                Window.getHeight() / 2.0 + 90 - M.getHeight() / 2), WIDTH, HEIGHT);
 
-    public Person(Point position) {
-        super(position, WIDTH, HEIGHT);
-        this.image = M;
+        this.foodie = foodie;
+        readInProperties();
+        this.hungerStatus = new Status(new Point(300, 50), "Hunger", true);
+        this.weightStatus = new Status(new Point(300, 90), "Weight", false);
+        this.energyStatus = new Status(new Point(300, 70), "Energy", true);
+        this.aura = null;
     }
 
-    public Person(Point position, Properties properties) {
-        super(position, WIDTH, HEIGHT);
-        this.properties = properties;
+    public void readInProperties() {
+        Properties prop = null;
+        try (InputStream file = new FileInputStream("./res/Properties/person.properties")) {
+            prop = new Properties();
+            prop.load(file);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        this.properties = prop;
         this.image = M;
         this.weight = Double.parseDouble(properties.getProperty("weight"));
         this.hunger = Double.parseDouble(properties.getProperty("hunger"));
         this.lastUpdated = Long.parseLong(properties.getProperty("lastUpdated"));
         this.energy = Double.parseDouble(properties.getProperty("energy"));
         if (lastUpdated == 0) lastUpdated = System.currentTimeMillis();
-        this.hungerStatus = new Status(new Point(300, 50), "Hunger", true);
-        this.weightStatus = new Status(new Point(300, 90), "Weight", false);
-        this.energyStatus = new Status(new Point(300, 70), "Energy", true);
     }
 
 
@@ -64,10 +74,34 @@ public class Person extends Rectangle {
         energy = Math.min(100, energy + food.getEnergy());
     }
 
-    public boolean updateCharacter() {
+    public void updateCharacter(Input input) {
+        if (foodie.gameState == Foodie.CHOOSING_WINDOW) return;
+        if (foodie.gameState == Foodie.NOT_STARTED) {
+            resetPlayer();
+            return;
+        }
+        if (foodie.gameState == Foodie.GAME_OVER) {
+            displayCharacter();
+            return;
+        }
+        changeImage();
+        updateStatus();
+        updateAura();
+        displayAllStatus();
+        displayCharacter();
+        displayAura();
+        if (hasDied()) {
+            foodie.setGameState(Foodie.GAME_OVER);
+        }
+
+    }
+    public boolean hasDied() {
+        return image == XL_DEATH;
+    }
+
+    public void changeImage() {
         if (this.weight < 45) {
             this.image = XS_DEATH;
-            return true;
         } else if (this.weight < 50) {
             this.image = XS;
         } else if (this.weight < 55) {
@@ -78,13 +112,8 @@ public class Person extends Rectangle {
             this.image = XL;
         } else {
             this.image = XL_DEATH;
-            return true;
         }
-        updateStatus();
-        displayAllStatus();
-        return  false;
     }
-
 
     public void updateStatus() {
         long currentTime = System.currentTimeMillis();
@@ -100,6 +129,17 @@ public class Person extends Rectangle {
         energyStatus.displayStatus(energy);
     }
 
+    public void updateAura() {
+        if (energy >= 80) aura = new Image("./res/Aura/energetic.png");
+        else if (energy <= 20) aura = new Image("./res/Aura/lowenergy.png");
+        else aura = null;
+    }
+
+    public void displayAura() {
+        if (aura == null) return;
+        else aura.draw(220, 400);
+    }
+
     public void save() {
         try(OutputStream out = new FileOutputStream("./res/Properties/person.properties")) {
             properties.setProperty("hunger", Double.toString(hunger));
@@ -111,6 +151,19 @@ public class Person extends Rectangle {
             e.printStackTrace();
         }
 
+    }
+
+    public void resetPlayer() {
+        try(OutputStream out = new FileOutputStream("./res/Properties/person.properties")) {
+            properties.setProperty("hunger", Double.toString(50));
+            properties.setProperty("weight", Double.toString(50));
+            properties.setProperty("lastUpdated", Long.toString(0));
+            properties.setProperty("energy", Double.toString(50));
+            properties.store(out, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        readInProperties();
     }
 
 

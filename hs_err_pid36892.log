@@ -16,7 +16,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.2\lib\idea_rt.jar=4623:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.2\bin -Dfile.encoding=UTF-8 ganFanRen
+Command Line: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.2\lib\idea_rt.jar=4623:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.2\bin -Dfile.encoding=UTF-8 Foodie
 
 Host: 11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz, 16 cores, 31G,  Windows 10 , 64 bit Build 19041 (10.0.19041.1645)
 Time: Sat Apr 23 00:46:06 2022  Windows 10 , 64 bit Build 19041 (10.0.19041.1645) elapsed time: 360.060474 seconds (0d 0h 6m 0s)
@@ -411,7 +411,7 @@ Event: 109.175 Thread 0x000001719386a1b0 nmethod 1117 0x00000171f54c4d10 code [0
 Event: 109.176 Thread 0x000001719386a1b0 1118       4       org.lwjgl.opengl.GL11::glClear (5 bytes)
 Event: 109.176 Thread 0x000001719d585650 1119       4       bagel.AbstractGame$$Lambda$57/0x0000000800c1f108::run (8 bytes)
 Event: 109.177 Thread 0x000001719386a1b0 nmethod 1118 0x00000171f54c5010 code [0x00000171f54c51a0, 0x00000171f54c5228]
-Event: 109.177 Thread 0x000001719386a1b0 1120   !   4       ganFanRen::update (685 bytes)
+Event: 109.177 Thread 0x000001719386a1b0 1120   !   4       Foodie::update (685 bytes)
 Event: 109.177 Thread 0x000001719d460e10 1121       4       Person::displayCharacter (22 bytes)
 Event: 109.192 Thread 0x000001719d460e10 nmethod 1121 0x00000171f54c5310 code [0x00000171f54c5500, 0x00000171f54c58e8]
 Event: 109.192 Thread 0x000001719d585650 nmethod 1119 0x00000171f54c5d10 code [0x00000171f54c5ee0, 0x00000171f54c6228]
@@ -637,8 +637,8 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Pr
 
 VM Arguments:
 jvm_args: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.2\lib\idea_rt.jar=4623:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.2\bin -Dfile.encoding=UTF-8 
-java_command: ganFanRen
-java_class_path (initial): C:\Users\alanz\IdeaProjects\ganFanRen\ganFanRen\target\classes;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl\3.3.1\lwjgl-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-assimp\3.3.1\lwjgl-assimp-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-glfw\3.3.1\lwjgl-glfw-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-openal\3.3.1\lwjgl-openal-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-opengl\3.3.1\lwjgl-opengl-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-stb\3.3.1\lwjgl-stb-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl\3.3.1\lwjgl-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-assimp\3.3.1\lwjgl-assimp-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-glfw\3.3.1\lwjgl-glfw-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-openal\3.3.1\lwjgl-openal-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-opengl\3.3.1\lwjgl-opengl-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-stb\3.3.1\lwjgl-stb-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\io\github\eleanor-em\bagel\1.9.3\bagel-1.9.3.jar
+java_command: Foodie
+java_class_path (initial): C:\Users\alanz\IdeaProjects\Foodie\Foodie\target\classes;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl\3.3.1\lwjgl-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-assimp\3.3.1\lwjgl-assimp-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-glfw\3.3.1\lwjgl-glfw-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-openal\3.3.1\lwjgl-openal-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-opengl\3.3.1\lwjgl-opengl-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-stb\3.3.1\lwjgl-stb-3.3.1.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl\3.3.1\lwjgl-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-assimp\3.3.1\lwjgl-assimp-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-glfw\3.3.1\lwjgl-glfw-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-openal\3.3.1\lwjgl-openal-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-opengl\3.3.1\lwjgl-opengl-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\org\lwjgl\lwjgl-stb\3.3.1\lwjgl-stb-3.3.1-natives-windows.jar;C:\Users\alanz\.m2\repository\io\github\eleanor-em\bagel\1.9.3\bagel-1.9.3.jar
 Launcher Type: SUN_STANDARD
 
 [Global flags]
