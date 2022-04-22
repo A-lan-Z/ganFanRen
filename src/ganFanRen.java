@@ -21,11 +21,15 @@ public class ganFanRen extends AbstractGame{
     private final Image ANGRY = new Image("res/character/Male_Angry.png");
     private final Image BAR = new Image("res/bar.png");
     private final Image MENU_ICON = new Image("res/menu_icon_2.png");
+    private final Image APPLE = new Image("res/Food/burger.png");
+    private final Image BURGER = new Image("res/Food/apple.png");
+    private final Image ICE_CREAM = new Image("res/Food/ice_cream.png");
     private final Font font = new Font("res/wheaton.otf", 55);
     private final Font chooseFont = new Font("res/wheaton.otf", 45);
 
     private Character character;
     private int gameState = NOT_STARTED;
+    private Food[] foods;
 
     public ganFanRen() {super(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_TITLE);}
 
@@ -79,7 +83,13 @@ public class ganFanRen extends AbstractGame{
     @Override
     public void update(Input input) {
         BACKGROUND_IMAGE.draw(Window.getWidth()/2.0, Window.getHeight()/2.0);
-        Food burger = new Food(2, 0, 0, 0);
+        Food apple = new Food(APPLE, 1, 0, 0, 0);
+        Food burger = new Food(BURGER,4, 0, 0, 0);
+        Food iceCream = new Food(ICE_CREAM,2, 0, 0, 0);
+        foods = new Food[3];
+        foods[0] = apple;
+        foods[1] = burger;
+        foods[2] = iceCream;
 
 
         if (gameState == NOT_STARTED) {
@@ -89,7 +99,7 @@ public class ganFanRen extends AbstractGame{
                 Point centre = new Point(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
                 Point topLeft = findTopLeft(ANGRY, centre);
                 character = new Character(topLeft);
-                gameState = CHOOSING_WINDOW;
+                gameState = MAIN_WINDOW;
             }
         } else if (gameState == CHOOSING_WINDOW) {
             BAR.draw(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
@@ -107,9 +117,17 @@ public class ganFanRen extends AbstractGame{
 
         } else if (gameState == MENU_WINDOW) {
             System.out.println("in menu");
-            character.updateCharacter();
+            // character.updateCharacter();
             character.displayCharacter();
-            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1);
+            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/1.0);
+            // Render all food.
+            for (Food food : foods) {
+                if (foods == null) {
+                    break;
+                }
+                // Draw food at desired position.
+                food.displayFood(100, 450);
+            }
         }
 
         /* Exit the game at any state through ESC. */
