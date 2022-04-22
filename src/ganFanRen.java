@@ -4,6 +4,8 @@ import bagel.Image;
 import bagel.Window;
 import bagel.util.Point;
 import bagel.util.Rectangle;
+import java.io.*;
+import java.util.*;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -93,12 +95,19 @@ public class ganFanRen extends AbstractGame{
 
 
         if (gameState == NOT_STARTED) {
+            Properties prop = null;
+            try (InputStream file = new FileInputStream("./res/Properties/person.properties")) {
+                prop = new Properties();
+                prop.load(file);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             printMessage(GAME_TITLE, font, 0);
             /* Start the game after space. */
             if (input.wasPressed(Keys.SPACE)) {
                 Point centre = new Point(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
                 Point topLeft = findTopLeft(ANGRY, centre);
-                character = new Character(topLeft);
+                character = new Character(topLeft, prop);
                 gameState = MAIN_WINDOW;
             }
         } else if (gameState == CHOOSING_WINDOW) {

@@ -1,6 +1,7 @@
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Rectangle;
+import java.util.*;
 
 public class Character extends Rectangle {
     private static int race = 0;
@@ -12,21 +13,29 @@ public class Character extends Rectangle {
 
     /* Attributes */
     Image image;
-    private int weight = 0;
+    private double weight;
+    private double hunger;
+    private long lastUpdated;
     private int mood = 0;
     private int hair = 0;
     private int acne = 0;
+    private Properties properties;
+
 
     public Character(Point position) {
         super(position, WIDTH, HEIGHT);
         this.image = ANGRY;
     }
 
-    public Character(Point position, int weight) {
+    public Character(Point position, Properties properties) {
         super(position, WIDTH, HEIGHT);
+        this.properties = properties;
         this.image = ANGRY;
-        this.weight = weight;
+        this.weight = Double.parseDouble(properties.getProperty("weight"));
+        this.hunger = Double.parseDouble(properties.getProperty("hunger"));
+        this.lastUpdated = Long.parseLong(properties.getProperty("lastUpdated"));
     }
+
 
     public void displayCharacter() {
         image.draw(this.centre().x, this.centre().y);
@@ -45,6 +54,21 @@ public class Character extends Rectangle {
         } else if(this.weight >= 8) {
             this.image = DISGUST;
         }
+        decreaseHunger();
+    }
+
+
+    public void decreaseHunger() {
+        long currentTime = System.currentTimeMillis();
+        double diff = (double) (currentTime - lastUpdated)/(100*60*60);
+        hunger = Double.max(0,hunger - diff*10);
+        lastUpdated = currentTime;
+    }
+
+    public void save() {
+        properties.setProperty("weight", Double.toString(weight));
+        properties.setProperty("hunger", Double.toString(hunger));
+        properties.setProperty("lastUpdated", Long.toString(lastUpdated));
     }
 
     @Override
