@@ -7,9 +7,6 @@ import bagel.util.Rectangle;
 import java.io.*;
 import java.util.*;
 
-import java.io.FileReader;
-import java.io.BufferedReader;
-
 public class ganFanRen extends AbstractGame{
     private final static int WINDOW_WIDTH = 428;
     private final static int WINDOW_HEIGHT = 926;
@@ -28,7 +25,7 @@ public class ganFanRen extends AbstractGame{
     private final Font font = new Font("res/wheaton.otf", 55);
     private final Font chooseFont = new Font("res/wheaton.otf", 45);
 
-    private Character character;
+    private Person person;
     private int gameState = NOT_STARTED;
     private Food[] foods;
 
@@ -107,7 +104,7 @@ public class ganFanRen extends AbstractGame{
             if (input.wasPressed(Keys.SPACE)) {
                 Point centre = new Point(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
                 Point topLeft = findTopLeft(M, centre);
-                character = new Character(topLeft, prop);
+                person = new Person(topLeft, prop);
                 gameState = MAIN_WINDOW;
             }
         } else if (gameState == CHOOSING_WINDOW) {
@@ -117,8 +114,8 @@ public class ganFanRen extends AbstractGame{
             printMessage("Choose your Weight", chooseFont, 50);
 
         } else if (gameState == MAIN_WINDOW) {
-            character.updateCharacter();
-            character.displayCharacter();
+            person.updateCharacter();
+            person.displayCharacter();
             MENU_ICON.draw(70, 860);
             Rectangle menuHitBox = MENU_ICON.getBoundingBoxAt(new Point(70, 860));
             if (detectBottomPress(input, menuHitBox)) {
@@ -128,7 +125,7 @@ public class ganFanRen extends AbstractGame{
         } else if (gameState == MENU_WINDOW) {
             // System.out.println("in menu");
             // character.updateCharacter();
-            character.displayCharacter();
+            person.displayCharacter();
             BAR.draw(Window.getWidth() / 2.0, Window.getHeight() / 0.7);
             // Render all food.
             int x = 60;
@@ -142,8 +139,8 @@ public class ganFanRen extends AbstractGame{
                     y += 200;
                 }
                 if (detectBottomPress(input, food)) {
-                    character.eat(food);
-                    System.out.println(character.toString());
+                    person.eat(food);
+                    System.out.println(person.toString());
                     gameState = MAIN_WINDOW;
                 }
                 if (input.wasPressed(Keys.BACKSPACE)) {
@@ -154,7 +151,7 @@ public class ganFanRen extends AbstractGame{
 
         /* Exit the game at any state through ESC. */
         if (input.wasPressed(Keys.ESCAPE)){
-            character.save();
+            person.save();
             Window.close();
         }
 

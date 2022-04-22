@@ -5,7 +5,7 @@ import bagel.util.Rectangle;
 import java.io.*;
 import java.util.*;
 
-public class Character extends Rectangle {
+public class Person extends Rectangle {
     private static int race = 0;
     private static final Image M = new Image("res/character/M.png");
     private static final Image BLUSH = new Image("res/character/Male_Blush.png");
@@ -26,12 +26,12 @@ public class Character extends Rectangle {
     private Status weightStatus;
 
 
-    public Character(Point position) {
+    public Person(Point position) {
         super(position, WIDTH, HEIGHT);
         this.image = M;
     }
 
-    public Character(Point position, Properties properties) {
+    public Person(Point position, Properties properties) {
         super(position, WIDTH, HEIGHT);
         this.properties = properties;
         this.image = M;
