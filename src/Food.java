@@ -7,12 +7,12 @@ public class Food extends Rectangle{
     private static final int HEIGHT = 96;
 
     private Image image;
-    private int weight = 0;
-    private int mood = 0;
-    private int hair = 0;
-    private int acne = 0;
+    private double weight = 0;
+    private double mood = 0;
+    private double hair = 0;
+    private double acne = 0;
 
-    public Food(Image image, int weight, int mood, int hair, int acne) {
+    public Food(Image image, double weight, double mood, double hair, double acne) {
         super(new Point(0, 0), WIDTH, HEIGHT);
         this.image = image;
         this.weight = weight;
@@ -21,19 +21,19 @@ public class Food extends Rectangle{
         this.acne = acne;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public int getMood() {
+    public double getMood() {
         return mood;
     }
 
-    public int getHair() {
+    public double getHair() {
         return hair;
     }
 
-    public int getAcne() {
+    public double getAcne() {
         return acne;
     }
 
