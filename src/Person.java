@@ -17,13 +17,15 @@ public class Person extends Rectangle {
     Image image;
     private double weight;
     private double hunger;
+    private double energy;
     private long lastUpdated;
-    private int mood = 0;
-    private int hair = 0;
-    private int acne = 0;
+    private double mood = 0;
+    private double hair = 0;
+    private double acne = 0;
     private Properties properties;
     private Status hungerStatus;
     private Status weightStatus;
+    private Status energyStatus;
 
 
     public Person(Point position) {
@@ -38,9 +40,11 @@ public class Person extends Rectangle {
         this.weight = Double.parseDouble(properties.getProperty("weight"));
         this.hunger = Double.parseDouble(properties.getProperty("hunger"));
         this.lastUpdated = Long.parseLong(properties.getProperty("lastUpdated"));
+        this.energy = Double.parseDouble(properties.getProperty("energy"));
         if (lastUpdated == 0) lastUpdated = System.currentTimeMillis();
         this.hungerStatus = new Status(new Point(300, 50), "Hunger", true);
-        this.weightStatus = new Status(new Point(300, 70), "Weight", false);
+        this.weightStatus = new Status(new Point(300, 90), "Weight", false);
+        this.energyStatus = new Status(new Point(300, 70), "Energy", true);
     }
 
 
@@ -49,11 +53,12 @@ public class Person extends Rectangle {
     }
 
     public void eat(Food food) {
-        this.weight += food.getWeight();
-        this.hunger += food.getHunger();
-        this.mood += food.getMood();
-        this.hair += food.getHair();
-        this.acne += food.getAcne();
+        weight = Math.min(100, weight + food.getWeight());
+        hunger = Math.min(100, hunger + food.getHunger());
+        mood = Math.min(100, mood + food.getMood());
+        hair = Math.min(100, hair + food.getHair());
+        acne = Math.min(100, acne + food.getAcne());
+        energy = Math.min(100, energy + food.getEnergy());
     }
 
     public void updateCharacter() {
@@ -79,14 +84,16 @@ public class Person extends Rectangle {
 
     public void updateStatus() {
         long currentTime = System.currentTimeMillis();
-        double diffInHour = (double) (currentTime - lastUpdated)/(100*60*60);
+        double diffInHour = (double) (currentTime - lastUpdated)/(1000*60*60);
         hunger = Double.max(0,hunger - diffInHour*10);
+        energy = Double.max(0, energy - diffInHour*10);
         lastUpdated = currentTime;
     }
 
     public void displayAllStatus() {
         hungerStatus.displayStatus(hunger);
         weightStatus.displayStatus(weight);
+        energyStatus.displayStatus(energy);
     }
 
     public void save() {
@@ -94,6 +101,7 @@ public class Person extends Rectangle {
             properties.setProperty("hunger", Double.toString(hunger));
             properties.setProperty("weight", Double.toString(weight));
             properties.setProperty("lastUpdated", Long.toString(lastUpdated));
+            properties.setProperty("energy", Double.toString(energy));
             properties.store(out, null);
         } catch (Exception e) {
             e.printStackTrace();
