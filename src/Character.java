@@ -1,6 +1,8 @@
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Rectangle;
+
+import java.io.*;
 import java.util.*;
 
 public class Character extends Rectangle {
@@ -20,6 +22,8 @@ public class Character extends Rectangle {
     private int hair = 0;
     private int acne = 0;
     private Properties properties;
+    private Status hungerStatus;
+    private Status weightStatus;
 
 
     public Character(Point position) {
@@ -34,6 +38,9 @@ public class Character extends Rectangle {
         this.weight = Double.parseDouble(properties.getProperty("weight"));
         this.hunger = Double.parseDouble(properties.getProperty("hunger"));
         this.lastUpdated = Long.parseLong(properties.getProperty("lastUpdated"));
+        if (lastUpdated == 0) lastUpdated = System.currentTimeMillis();
+        this.hungerStatus = new Status(new Point(300, 50), "Hunger", true);
+        this.weightStatus = new Status(new Point(300, 70), "Weight", false);
     }
 
 
@@ -43,6 +50,7 @@ public class Character extends Rectangle {
 
     public void eat(Food food) {
         this.weight += food.getWeight();
+        this.hunger += food.getHunger();
         this.mood += food.getMood();
         this.hair += food.getHair();
         this.acne += food.getAcne();
@@ -64,22 +72,28 @@ public class Character extends Rectangle {
         } else {
             // Death
         }
-        decreaseHunger();
+        updateStatus();
+        displayAllStatus();
     }
 
 
-    public void decreaseHunger() {
+    public void updateStatus() {
         long currentTime = System.currentTimeMillis();
-        double diff = (double) (currentTime - lastUpdated)/(100*60*60);
-        hunger = Double.max(0,hunger - diff*10);
+        double diffInHour = (double) (currentTime - lastUpdated)/(100*60*60);
+        hunger = Double.max(0,hunger - diffInHour*10);
         lastUpdated = currentTime;
     }
 
-    public void save() {
-        properties.setProperty("weight", Double.toString(weight));
-        properties.setProperty("hunger", Double.toString(hunger));
-        properties.setProperty("lastUpdated", Long.toString(lastUpdated));
+    public void displayAllStatus() {
+        hungerStatus.displayStatus(hunger);
+        weightStatus.displayStatus(weight);
     }
+
+    public void save() throws IOException {
+
+        properties.store(new BufferedWriter(new FileWriter("./res/Properties/person.properties")), "");
+    }
+
 
     @Override
     public String toString() {

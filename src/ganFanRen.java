@@ -85,9 +85,9 @@ public class ganFanRen extends AbstractGame{
     @Override
     public void update(Input input) {
         BACKGROUND_IMAGE.draw(Window.getWidth()/2.0, Window.getHeight()/2.0);
-        Food apple = new Food(APPLE, 0.09, 0, 0, 0);
-        Food burger = new Food(BURGER,0.55, 0, 0, 0);
-        Food iceCream = new Food(ICE_CREAM,0.15, 0, 0, 0);
+        Food apple = new Food(APPLE, 0.09, 15, 0, 0, 0);
+        Food burger = new Food(BURGER,0.55, 40, 0, 0, 0);
+        Food iceCream = new Food(ICE_CREAM,0.15, 20, 0, 0, 0);
         foods = new Food[3];
         foods[0] = apple;
         foods[1] = burger;
@@ -102,6 +102,7 @@ public class ganFanRen extends AbstractGame{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            BAR.draw(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
             printMessage(GAME_TITLE, font, 0);
             /* Start the game after space. */
             if (input.wasPressed(Keys.SPACE)) {
@@ -129,7 +130,7 @@ public class ganFanRen extends AbstractGame{
             // System.out.println("in menu");
             // character.updateCharacter();
             character.displayCharacter();
-            BAR.draw(Window.getWidth()/2.0, Window.getHeight()/0.7);
+            BAR.draw(Window.getWidth() / 2.0, Window.getHeight() / 0.7);
             // Render all food.
             int x = 60;
             int y = 850;
@@ -146,11 +147,19 @@ public class ganFanRen extends AbstractGame{
                     System.out.println(character.toString());
                     gameState = MAIN_WINDOW;
                 }
+                if (input.wasPressed(Keys.BACKSPACE)) {
+                    gameState = MAIN_WINDOW;
+                }
             }
         }
 
         /* Exit the game at any state through ESC. */
         if (input.wasPressed(Keys.ESCAPE)){
+            try {
+                character.save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Window.close();
         }
 
