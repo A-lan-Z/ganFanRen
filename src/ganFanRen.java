@@ -16,7 +16,7 @@ public class ganFanRen extends AbstractGame{
     private final static int MENU_WINDOW = 2;
     private final static int GAME_OVER = 3;
     private final static String GAME_TITLE = "Gan Fan Ren";
-    private final Image BACKGROUND_IMAGE = new Image("res/room.png");
+    private final Image BACKGROUND_IMAGE = new Image("res/background.jpg");
     private final Image M = new Image("res/character/M.png");
     private final Image BAR = new Image("res/bar.png");
     private final Image MENU_ICON = new Image("res/menu_icon_2.png");
@@ -103,7 +103,7 @@ public class ganFanRen extends AbstractGame{
             printMessage(GAME_TITLE, font, 0);
             /* Start the game after space. */
             if (input.wasPressed(Keys.SPACE)) {
-                Point centre = new Point(Window.getWidth() / 2.0, Window.getHeight() / 2.0);
+                Point centre = new Point(Window.getWidth() / 2.0, Window.getHeight() / 2.0 + 90);
                 Point topLeft = findTopLeft(M, centre);
                 person = new Person(topLeft, prop);
                 gameState = MAIN_WINDOW;
@@ -127,7 +127,6 @@ public class ganFanRen extends AbstractGame{
 
         } else if (gameState == MENU_WINDOW) {
             person.displayCharacter();
-            BAR.draw(Window.getWidth() / 2.0, Window.getHeight() / 0.7);
             // Render all food.
             int x = 60;
             int y = 850;

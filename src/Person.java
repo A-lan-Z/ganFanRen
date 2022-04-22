@@ -10,9 +10,9 @@ public class Person extends Rectangle {
     private static final Image XS_DEATH = new Image("res/character/XS_Death.png");
     private static final Image XS = new Image("res/character/XS.png");
     private static final Image M = new Image("res/character/M.png");
+    private static final Image L = new Image("res/character/L.png");
     private static final Image XL = new Image("res/character/XL.png");
     private static final Image XL_DEATH = new Image("res/character/XL_Death.png");
-    private static final Image DISGUST = new Image("res/character/Male_Disgust.png");
     private static final int WIDTH = (int) M.getWidth();
     private static final int HEIGHT = (int) M.getHeight();
 
@@ -73,7 +73,7 @@ public class Person extends Rectangle {
         } else if (this.weight < 55) {
             this.image = M;
         } else if (this.weight < 60) {
-            // this.image = L;
+            this.image = L;
         } else if (this.weight < 65) {
             this.image = XL;
         } else {
