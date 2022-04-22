@@ -14,6 +14,7 @@ public class ganFanRen extends AbstractGame{
     private final static int CHOOSING_WINDOW = 0;
     private final static int MAIN_WINDOW = 1;
     private final static int MENU_WINDOW = 2;
+    private final static int GAME_OVER = 3;
     private final static String GAME_TITLE = "Gan Fan Ren";
     private final Image BACKGROUND_IMAGE = new Image("res/room.png");
     private final Image M = new Image("res/character/M.png");

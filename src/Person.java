@@ -7,8 +7,11 @@ import java.util.*;
 
 public class Person extends Rectangle {
     private static int race = 0;
+    private static final Image XS_DEATH = new Image("res/character/XS_Death.png");
+    private static final Image XS = new Image("res/character/XS.png");
     private static final Image M = new Image("res/character/M.png");
-    private static final Image BLUSH = new Image("res/character/Male_Blush.png");
+    private static final Image XL = new Image("res/character/XL.png");
+    private static final Image XL_DEATH = new Image("res/character/XL_Death.png");
     private static final Image DISGUST = new Image("res/character/Male_Disgust.png");
     private static final int WIDTH = (int) M.getWidth();
     private static final int HEIGHT = (int) M.getHeight();
@@ -61,24 +64,25 @@ public class Person extends Rectangle {
         energy = Math.min(100, energy + food.getEnergy());
     }
 
-    public void updateCharacter() {
-        if (this.weight < 40) {
-            // Death
-        } else if (this.weight < 45) {
-            // this.image = XS;
+    public boolean updateCharacter() {
+        if (this.weight < 45) {
+            this.image = XS_DEATH;
+            return true;
         } else if (this.weight < 50) {
-            // this.image = S;
+            this.image = XS;
         } else if (this.weight < 55) {
             this.image = M;
         } else if (this.weight < 60) {
             // this.image = L;
         } else if (this.weight < 65) {
-            // this.image = XL;
+            this.image = XL;
         } else {
-            // Death
+            this.image = XL_DEATH;
+            return true;
         }
         updateStatus();
         displayAllStatus();
+        return  false;
     }
 
 
