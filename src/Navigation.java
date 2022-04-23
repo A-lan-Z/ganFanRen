@@ -10,7 +10,7 @@ public class Navigation {
     private final Image MENU_ICON = new Image("res/menu_icon_2.png");
 
     private List<Food> foods = new ArrayList<>();
-    private List<String> foodNames = Arrays.asList("apple", "burger", "icecream");
+    private List<String> foodNames = Arrays.asList("apple", "burger", "icecream", "carrot", "salad");
     private Foodie foodie;
     private Person person;
 
@@ -62,16 +62,12 @@ public class Navigation {
 
     private void renderFood(Input input) {
         // Render all food.
-        int x = 60;
+        int x = 40;
         int y = 850;
         for (Food food : foods) {
             // Draw food at desired position.
             food.displayFood(x, y);
-            x += 90;
-            if (x >= 428) {
-                x = 60;
-                y += 200;
-            }
+            x += 85;
             if (detectBottomPress(input, food)) {
                 person.eat(food);
                 System.out.println(person.toString());
