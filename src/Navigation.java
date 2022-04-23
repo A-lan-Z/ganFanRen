@@ -7,7 +7,11 @@ import bagel.*;
 import bagel.util.*;
 
 public class Navigation {
-    private final Image MENU_ICON = new Image("res/menu_icon_2.png");
+    private final Image MENU_ICON = new Image("res/menu_icon.png");
+    private final Image CLOTH_ICON = new Image("res/Clothes_icon.png");
+    private final Image EXERCISE_ICON = new Image("res/Exercise_icon.png");
+    private final Image SOCIAL_ICON = new Image("res/Social_icon.png");
+    private final Image RANK_ICON = new Image("res/Rank_icon.png");
 
     private List<Food> foods = new ArrayList<>();
     private List<String> foodNames = Arrays.asList("apple", "burger", "icecream", "carrot", "salad");
@@ -36,7 +40,11 @@ public class Navigation {
 
     public void updateNg(Input input) {
         if (foodie.gameState == Foodie.MAIN_WINDOW) {
-            MENU_ICON.draw(70, 860);
+            MENU_ICON.draw(40, 860);
+            CLOTH_ICON.draw(126, 860);
+            EXERCISE_ICON.draw(212, 860);
+            SOCIAL_ICON.draw(298, 860);
+            RANK_ICON.draw(384, 860);
             if (hasClikcedMenuButton(input)) foodie.setGameState(Foodie.MENU_WINDOW);
         } else if (foodie.gameState == Foodie.MENU_WINDOW) {
             renderFood(input);
