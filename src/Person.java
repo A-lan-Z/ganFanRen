@@ -133,7 +133,7 @@ public class Person extends Rectangle {
 
     public void displayAura() {
         if (aura == null) return;
-        else aura.draw(220, 400);
+        else aura.draw(220, 380);
     }
 
     public void save() {
